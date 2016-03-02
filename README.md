@@ -1,4 +1,4 @@
-# AWS Lambda Bash Function Template
+# AWS Lambda Bash Function Blueprint Template
 
 ####   by Jacob Baloul
 
