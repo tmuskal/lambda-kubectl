@@ -1,0 +1,1 @@
+"stdout: BASH RANDOM: 28465\n"

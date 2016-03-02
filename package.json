@@ -1,0 +1,15 @@
+{
+  "name": "lambdabash",
+  "version": "1.0.0",
+  "description": "nodejs lambda function to invoke a bash shell script",
+  "main": "lambdabash.js",
+  "scripts": {
+    "test": "node lambdabash.js"
+  },
+  "keywords": [
+    "nodejs",
+    "lambda"
+  ],
+  "author": "Jacob Baloul",
+  "license": "ISC"
+}
