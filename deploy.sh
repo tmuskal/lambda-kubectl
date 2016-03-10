@@ -34,14 +34,16 @@ removing old lambda function (deleting zip remotely) from amazon aws lambda...
 "
 aws lambda delete-function \
  --function-name lambdabash \
+ --profile $PROFILE \
  --region $REGION
 
-check_error
+#--# add if exist logic ^
+#--# check_error
 
 echo "
 uploading new zip to lambda...
 "
-aws lambda create-function --function-name lambdabash --zip-file fileb://lambdabash.zip --role $IAMARN --handler lambdabash.handler --runtime nodejs
+aws lambda create-function --function-name lambdabash --zip-file fileb://lambdabash.zip --role $IAMARN --handler lambdabash.handler --runtime nodejs --profile $PROFILE --region $REGION
 
 check_error
 
@@ -54,6 +56,7 @@ aws lambda invoke \
 --region $REGION \
 --log-type Tail \
 --payload file://input.txt \
+--profile $PROFILE \
 --output json \
 outputfile.txt
 

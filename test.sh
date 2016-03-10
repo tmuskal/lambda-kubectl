@@ -25,6 +25,7 @@ aws lambda invoke \
 --invocation-type RequestResponse \
 --function-name lambdabash \
 --region us-east-1 \
+--profile $PROFILE \
 --log-type Tail \
 --payload file://input.txt \
 --output json \
