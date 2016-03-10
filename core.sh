@@ -15,6 +15,12 @@
 	#	you can package your existing shell scripts and call them here
 	#
 	echo "BASH RANDOM: $RANDOM" && seq 1 18 && echo {19..36}
+	uname -a
+	uptime
+	cat /proc/cpuinfo
+	free -m
+	df -h
+	date
 
 	#--# echo "=END="
 ###

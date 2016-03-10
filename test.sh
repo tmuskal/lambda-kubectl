@@ -1,4 +1,22 @@
 #!/bin/bash
+# test lambdabash function in aws
+# author: @jacobbaloul
+#
+#
+function check_error(){
+if test $? -gt 0 ; then
+ echo "oops! something went wrong, aborting."
+ exit 1
+fi
+}
+#
+
+##
+## BEGIN
+##
+source settings.conf
+check_error
+
 
 
 if [ "$1" = '' ]
@@ -24,12 +42,13 @@ testing new lambda function by invoking...
 aws lambda invoke \
 --invocation-type RequestResponse \
 --function-name lambdabash \
---region us-east-1 \
---profile $PROFILE \
+--region $REGION \
 --log-type Tail \
 --payload file://input.txt \
+--profile $PROFILE \
 --output json \
 outputfile.txt
+
 
 cat outputfile.txt
 
@@ -37,4 +56,17 @@ cat outputfile.txt
 export CURRENTCNT=$[$CURRENTCNT+1]
 
 done
+
+
+echo "
+
+=====
+
+executed $CNT tests.
+
+DONE
+
+=====
+"
+
 # END
