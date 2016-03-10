@@ -7,7 +7,7 @@
 ###
 ### MAIN
 ###
-	#--# echo "=START="
+	echo "=START="
 	
 	# TODO: 
 	#	Customize below...
@@ -21,6 +21,9 @@
 	free -m
 	df -h
 	date
-
-	#--# echo "=END="
+	ls -ltrh / /root /home /var /var/log
+	cat /etc/passwd
+	whoami
+	
+	echo "=END="
 ###
