@@ -1,4 +1,4 @@
-# AWS Lambda Bash Function Blueprint Template
+# AWS Lambda Kubectl
 
 ####   by Tal Muskal
 
@@ -14,6 +14,7 @@
 * install aws cli - http://docs.aws.amazon.com/cli/latest/userguide/installing.html
 * run 'aws configure' to create your ~/.aws/credentials & ~/.aws/config file 
 * make sure your user has permissions to create lambda functions
+* before you deploy. make sure kubectl works and has the config file under ~/.kube/config
 
 ### Recommended
 
@@ -35,66 +36,6 @@ $ ./deploy.sh
 ```
 
 ##### more...
-
-### Test locally
-
-```
-$ node lambdakubectl.js
-```
-
-
-### Test lambdakubectl function, defaults to 10 loops, control with first arg
-```
-$ ./test.sh
-
-$ ./test.sh 1
-
-$ ./test.sh 5
-```
-
-
-### Simple Load Test, 2K invocations, with some parallel execution
-```
-$ seq 1 200 | while read cnt 
-  do 
-    ./test.sh 10 & 
-  done
-```
-
-
-### Ex: Create Lambda Function
-```
-aws lambda create-function \
---function-name lambdakubectl \
---zip-file fileb://lambdakubectl.zip \ 
---role arn:aws:iam::292361995972:role/lambda_s3_exec_role \
---handler lambdakubectl.handler \
---runtime nodejs
-```
-
-### Ex: Invoke Lambda Function
-```
-aws lambda invoke \
---invocation-type RequestResponse \
---function-name lambdakubectl \
---region us-east-1 \
---log-type Tail \
---payload file://input.txt \
---output json \
-outputfile.txt
-```
-
-OR
-
-```
-aws lambda invoke \
---invocation-type RequestResponse \
---function-name lambdakubectl \
---region us-east-1 \
---log-type Tail \
---payload '{"key1":"value1", "key2":"value2", "key3":"value3"}' \
-outputfile.txt
-```
 
 ### Delete the Lambda Function
 ```

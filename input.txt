@@ -1,5 +1,14 @@
 {
 	"command":"kubectl", 
 	"params":["apply","-f" , "-"],
-	"stdin":"some yaml"
+	"stdin":{
+		  "apiVersion": "v1",
+		  "data": {
+		    "aws.region": "test"
+		  },
+		  "kind": "ConfigMap",
+		  "metadata": {
+		    "name": "clusterconfiguration2"
+		  }
+		}
 }

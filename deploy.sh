@@ -28,7 +28,7 @@ chmod a+rw ./config
 echo "
 packaging lambdakubectl, creating new zip...
 "
-zip lambdakubectl.zip config lambdakubectl.js README.md package.json core.sh bin/*
+zip lambdakubectl.zip config lambdakubectl.js README.md package.json bin/*
 check_error
 
 echo "
@@ -45,7 +45,7 @@ aws lambda delete-function \
 echo "
 uploading new zip to lambda...
 "
-aws lambda create-function --timeout 60 --function-name lambdakubectl --zip-file fileb://lambdakubectl.zip --role $IAMARN --handler lambdakubectl.handler --runtime nodejs6.10 --profile $PROFILE --region $REGION
+aws lambda create-function --timeout 10 --function-name lambdakubectl --zip-file fileb://lambdakubectl.zip --role $IAMARN --handler lambdakubectl.handler --runtime nodejs6.10 --profile $PROFILE --region $REGION
 
 check_error
 
