@@ -1,6 +1,6 @@
 /* 
  *  lambdakubectl.js
- *  Lambda Bash Function: nodejs to wrap and execute kubectl
+ *  Lambda kubectl: nodejs to wrap and execute kubectl
  *  Author: Tal Muskal
  */
 
