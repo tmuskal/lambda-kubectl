@@ -1,5 +1,5 @@
 #!/bin/bash
-# test lambdabash function in aws
+# test lambdakubectl function in aws
 # author: @jacobbaloul
 #
 #
@@ -41,7 +41,7 @@ testing new lambda function by invoking...
 "
 aws lambda invoke \
 --invocation-type RequestResponse \
---function-name lambdabash \
+--function-name lambdakubectl \
 --region $REGION \
 --log-type Tail \
 --payload file://input.txt \

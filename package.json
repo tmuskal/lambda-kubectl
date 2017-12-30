@@ -1,15 +1,15 @@
 {
-  "name": "lambdabash",
+  "name": "lambdakubectl",
   "version": "1.0.0",
-  "description": "nodejs lambda function to invoke a bash shell script",
-  "main": "lambdabash.js",
+  "description": "nodejs lambda function to invoke kubectl",
+  "main": "lambdakubectl.js",
   "scripts": {
-    "test": "node lambdabash.js"
+    "test": "node lambdakubectl.js"
   },
   "keywords": [
     "nodejs",
     "lambda"
   ],
-  "author": "Jacob Baloul",
+  "author": "Tal Muskal",
   "license": "ISC"
 }

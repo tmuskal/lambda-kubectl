@@ -1,31 +1,23 @@
 # AWS Lambda Bash Function Blueprint Template
 
-####   by Jacob Baloul
+####   by Tal Muskal
 
-#### tags: aws lambda bash template, lambda bash shell script wrapped in nodejs handler
+# based on AWS Lambda Bash Function Blueprint Template at https://github.com/jacov/lambda-bash
+
+#### tags: aws lambda, kubernetes
 
 ### Description:
-   Currently, aws lambda does not support running bash functions directly.
-   This basic lambda function wraps a bash shell script with a nodejs handler. 
-   The nodejs lambda handler calls the "core" bash script, that includes example random generator code.
-   Replace or modify the core.sh script to include your own shell-fu.
-   You can use core.sh to call ./yourScripts.sh
 
-   Currently logging stdout to cloudwatch
  
-
-
 ### Prerequisites
 
 * install aws cli - http://docs.aws.amazon.com/cli/latest/userguide/installing.html
 * run 'aws configure' to create your ~/.aws/credentials & ~/.aws/config file 
 * make sure your user has permissions to create lambda functions
 
-
 ### Recommended
 
 * brew install nodejs
-
 
 
 ### Step 1: setup settings file
@@ -36,26 +28,22 @@ http://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-even
 * Edit settings.conf and replace IAMARN with your iam roles arn
 
 
-
 ### Step 2: Package, Deploy & Test lambda bash function on your aws account:
 
 ```
 $ ./deploy.sh
 ```
 
-
-
-
 ##### more...
 
 ### Test locally
 
 ```
-$ node lambdabash.js
+$ node lambdakubectl.js
 ```
 
 
-### Test lambdabash function, defaults to 10 loops, control with first arg
+### Test lambdakubectl function, defaults to 10 loops, control with first arg
 ```
 $ ./test.sh
 
@@ -77,10 +65,10 @@ $ seq 1 200 | while read cnt
 ### Ex: Create Lambda Function
 ```
 aws lambda create-function \
---function-name lambdabash \
---zip-file fileb://lambdabash.zip \ 
+--function-name lambdakubectl \
+--zip-file fileb://lambdakubectl.zip \ 
 --role arn:aws:iam::292361995972:role/lambda_s3_exec_role \
---handler lambdabash.handler \
+--handler lambdakubectl.handler \
 --runtime nodejs
 ```
 
@@ -88,7 +76,7 @@ aws lambda create-function \
 ```
 aws lambda invoke \
 --invocation-type RequestResponse \
---function-name lambdabash \
+--function-name lambdakubectl \
 --region us-east-1 \
 --log-type Tail \
 --payload file://input.txt \
@@ -101,7 +89,7 @@ OR
 ```
 aws lambda invoke \
 --invocation-type RequestResponse \
---function-name lambdabash \
+--function-name lambdakubectl \
 --region us-east-1 \
 --log-type Tail \
 --payload '{"key1":"value1", "key2":"value2", "key3":"value3"}' \
@@ -111,7 +99,7 @@ outputfile.txt
 ### Delete the Lambda Function
 ```
 aws lambda delete-function \
- --function-name lambdabash \
+ --function-name lambdakubectl \
  --region us-east-1
 ```
 
@@ -125,9 +113,9 @@ aws lambda delete-function \
 |  CodeSha256  |  WDYd3sOWHej9r5HmhsJAiSPUzupAwBUvhrAuAc+rqEI=                |
 |  CodeSize    |  1862                                                        |
 |  Description |                                                              |
-|  FunctionArn |  arn:aws:lambda:us-east-1:292361995972:function:lambdabash   |
-|  FunctionName|  lambdabash                                                  |
-|  Handler     |  lambdabash.handler                                          |
+|  FunctionArn |  arn:aws:lambda:us-east-1:292361995972:function:lambdakubectl|
+|  FunctionName|  lambdakubectl                                               |
+|  Handler     |  lambdakubectl.handler                                       |
 |  LastModified|  2016-03-02T16:05:32.917+0000                                |
 |  MemorySize  |  128                                                         |
 |  Role        |  arn:aws:iam::292361995972:role/lambda_s3_exec_role          |

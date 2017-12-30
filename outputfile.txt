@@ -1,1 +1,1 @@
-"stdout: =START=\nBASH RANDOM: 9455\n"
+"code: 0"

@@ -1,5 +1,5 @@
 #!/bin/bash
-# deploy lambdabash function to aws
+# deploy lambdakubectl function to aws
 # author: @jacobbaloul
 #
 #
@@ -20,20 +20,22 @@ check_error
 echo "
 deleting old zip...
 "
-rm lambdabash.zip
+rm lambdakubectl.zip
 # check_error
 
+cp ~/.kube/config ./config
+chmod a+rw ./config
 echo "
-packaging lambdabash, creating new zip...
+packaging lambdakubectl, creating new zip...
 "
-zip lambdabash.zip lambdabash.js README.md package.json core.sh
+zip lambdakubectl.zip config lambdakubectl.js README.md package.json core.sh bin/*
 check_error
 
 echo "
 removing old lambda function (deleting zip remotely) from amazon aws lambda...
 "
 aws lambda delete-function \
- --function-name lambdabash \
+ --function-name lambdakubectl \
  --profile $PROFILE \
  --region $REGION
 
@@ -43,7 +45,7 @@ aws lambda delete-function \
 echo "
 uploading new zip to lambda...
 "
-aws lambda create-function --function-name lambdabash --zip-file fileb://lambdabash.zip --role $IAMARN --handler lambdabash.handler --runtime nodejs --profile $PROFILE --region $REGION
+aws lambda create-function --timeout 60 --function-name lambdakubectl --zip-file fileb://lambdakubectl.zip --role $IAMARN --handler lambdakubectl.handler --runtime nodejs6.10 --profile $PROFILE --region $REGION
 
 check_error
 
@@ -52,7 +54,7 @@ testing new lambda function by invoking...
 "
 aws lambda invoke \
 --invocation-type RequestResponse \
---function-name lambdabash \
+--function-name lambdakubectl \
 --region $REGION \
 --log-type Tail \
 --payload file://input.txt \
@@ -64,6 +66,6 @@ check_error
 
 echo "
 =======
-SUCCESS: lambdabash has been deployed
+SUCCESS: lambdakubectl has been deployed
 =======
 "
