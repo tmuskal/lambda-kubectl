@@ -2,7 +2,7 @@
 
 ####   by Tal Muskal
 
-# based on AWS Lambda Bash Function Blueprint Template at https://github.com/jacov/lambda-bash
+##### based on AWS Lambda Bash Function Blueprint Template at https://github.com/jacov/lambda-bash
 
 #### tags: aws lambda, kubernetes
 
@@ -35,17 +35,11 @@ http://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-even
 $ ./deploy.sh
 ```
 
-##### more...
-
-### Delete the Lambda Function
-```
-aws lambda delete-function \
- --function-name lambdakubectl \
- --region us-east-1
-```
-
 
 ### Usage
+
+#### Apply ConfigMap
+
 ```
 {
 	"command":"kubectl", 
@@ -60,5 +54,14 @@ aws lambda delete-function \
 		    "name": "clusterconfiguration2"
 		  }
 		}
+}
+```
+
+
+#### List Pods
+```
+{
+	"command":"kubectl", 
+	"params":["get","pods"]
 }
 ```
