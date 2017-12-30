@@ -45,52 +45,20 @@ aws lambda delete-function \
 ```
 
 
-### Ex: Successful output after uploading the new zip to lambda...
-
-```
--------------------------------------------------------------------------------
-|                               CreateFunction                                |
-+--------------+--------------------------------------------------------------+
-|  CodeSha256  |  WDYd3sOWHej9r5HmhsJAiSPUzupAwBUvhrAuAc+rqEI=                |
-|  CodeSize    |  1862                                                        |
-|  Description |                                                              |
-|  FunctionArn |  arn:aws:lambda:us-east-1:292361995972:function:lambdakubectl|
-|  FunctionName|  lambdakubectl                                               |
-|  Handler     |  lambdakubectl.handler                                       |
-|  LastModified|  2016-03-02T16:05:32.917+0000                                |
-|  MemorySize  |  128                                                         |
-|  Role        |  arn:aws:iam::292361995972:role/lambda_s3_exec_role          |
-|  Runtime     |  nodejs                                                      |
-|  Timeout     |  3                                                           |
-|  Version     |  $LATEST                                                     |
-+--------------+--------------------------------------------------------------+
-```
-
-### Ex: Successful test of new lambda function by invoking...
-
+### Usage
 ```
 {
-    "LogResult": "U1RBUlQgUmVxdWVzdElkOiA5OGExNTM1My1lMDkwLTExZTUtOTA0MC1mNTliMGZkNjIzOTQgVmVyc2lvbjogJExBVEVTVAoyMDE2LTAzLTAyVDE2OjA1OjM1LjMzM1oJOThhMTUzNTMtZTA5MC0xMWU1LTkwNDAtZjU5YjBmZDYyMzk0CXN0ZG91dDogQkFTSCBSQU5ET006IDEzNDQKCkVORCBSZXF1ZXN0SWQ6IDk4YTE1MzUzLWUwOTAtMTFlNS05MDQwLWY1OWIwZmQ2MjM5NApSRVBPUlQgUmVxdWVzdElkOiA5OGExNTM1My1lMDkwLTExZTUtOTA0MC1mNTliMGZkNjIzOTQJRHVyYXRpb246IDE1OS40NyBtcwlCaWxsZWQgRHVyYXRpb246IDIwMCBtcyAJTWVtb3J5IFNpemU6IDEyOCBNQglNYXggTWVtb3J5IFVzZWQ6IDI5IE1CCQo=",
-    "StatusCode": 200
+	"command":"kubectl", 
+	"params":["apply","-f" , "-"],
+	"stdin":{
+		  "apiVersion": "v1",
+		  "data": {
+		    "aws.region": "test"
+		  },
+		  "kind": "ConfigMap",
+		  "metadata": {
+		    "name": "clusterconfiguration2"
+		  }
+		}
 }
 ```
-
-
-### Decoding the response
-
-```
-$ echo "_LogResult_" | base64 --decode
-```
-
-```
-$ echo "U1RBUlQgUmVxdWVzdElkOiA5OGExNTM1My1lMDkwLTExZTUtOTA0MC1mNTliMGZkNjIzOTQgVmVyc2lvbjogJExBVEVTVAoyMDE2LTAzLTAyVDE2OjA1OjM1LjMzM1oJOThhMTUzNTMtZTA5MC0xMWU1LTkwNDAtZjU5YjBmZDYyMzk0CXN0ZG91dDogQkFTSCBSQU5ET006IDEzNDQKCkVORCBSZXF1ZXN0SWQ6IDk4YTE1MzUzLWUwOTAtMTFlNS05MDQwLWY1OWIwZmQ2MjM5NApSRVBPUlQgUmVxdWVzdElkOiA5OGExNTM1My1lMDkwLTExZTUtOTA0MC1mNTliMGZkNjIzOTQJRHVyYXRpb246IDE1OS40NyBtcwlCaWxsZWQgRHVyYXRpb246IDIwMCBtcyAJTWVtb3J5IFNpemU6IDEyOCBNQglNYXggTWVtb3J5IFVzZWQ6IDI5IE1CCQo=" | base64 --decode
-START RequestId: 98a15353-e090-11e5-9040-f59b0fd62394 Version: $LATEST
-2016-03-02T16:05:35.333Z	98a15353-e090-11e5-9040-f59b0fd62394	stdout: BASH RANDOM: 1344
-
-END RequestId: 98a15353-e090-11e5-9040-f59b0fd62394
-REPORT RequestId: 98a15353-e090-11e5-9040-f59b0fd62394	Duration: 159.47 ms	Billed Duration: 200 ms 	Memory Size: 128 MB	Max Memory Used: 29 MB
-```
-
-
-### More Documentation
-*  http://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events-create-test-function.html

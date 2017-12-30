@@ -43,7 +43,7 @@ exports.handler = function(event, context) {
             context.fail({ code: code, strerr: strerr, stdout: stdout });
         }
         else {
-            context.succeed({ code: code, strerr: strerr, stdout: stdout });
+            context.succeed({ code: code, strerr: strerr, stdout: JSON.parse(stdout) });
         }
 
     });
@@ -52,6 +52,3 @@ exports.handler = function(event, context) {
         bash.stdin.end();
     }
 };
-
-
-// todo: add kubectl call
