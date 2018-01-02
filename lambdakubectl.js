@@ -13,8 +13,8 @@ exports.handler = function(event, context) {
     if (typeof(stdin) === "object") {
         stdin = JSON.stringify(stdin);
     }
-    params.push('--output');
-    params.push('json');
+    // params.push('--output');
+    // params.push('json');
     params.push('--kubeconfig');
     params.push('config');
     /* use spawn */
@@ -43,7 +43,7 @@ exports.handler = function(event, context) {
             context.fail({ code: code, strerr: strerr, stdout: stdout });
         }
         else {
-            context.succeed({ code: code, strerr: strerr, stdout: JSON.parse(stdout) });
+            context.succeed({ code: code, strerr: strerr, stdout: stdout });
         }
 
     });
